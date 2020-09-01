@@ -1,0 +1,30 @@
+{% load i18n %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+
+<ul>
+    <li>
+        {% for choice in choices %}
+            {% if forloop.first %}
+            <select id="filter_{{ title }}"
+                data-ajax--cache
+                data-ajax--type="GET"
+                data-ajax--url="{{ choice.url }}"
+                data-theme="admin-autocomplete"
+                data-allow-clear="true"
+                data-placeholder="{{ title|title }}"
+                data-querystring="{{ choice.query_string }}"
+                data-querystring-placeholder="{{ choice.query_string_placeholder }}"
+                data-querystring-all="{{ choice.query_string_all }}"
+                style="width:210px;"
+                class="admin-autocomplete admin-autocomplete-filter"
+                multiple="multiple"
+            >
+            {% endif %}
+
+            {% if choice.selected %}
+                <option selected value="{{ choice.selected }}">{{ choice.selected_display }}</option>
+            {% endif %}
+        {% endfor %}
+        </select>
+    </li>
+</ul>
