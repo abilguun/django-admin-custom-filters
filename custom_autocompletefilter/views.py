@@ -170,11 +170,11 @@ class Select2QuerySetView(Select2ViewMixin, BaseQuerySetView):
     """List options for a Select2 widget."""
 
 
+# non foreign key multiple choice autocomplete filter
 class FieldAutoComplete(Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated:
             return Item.objects.none()
-
 
         # get data from DB or cache
         # キャッシュからデータを取る
